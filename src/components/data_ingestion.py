@@ -11,6 +11,9 @@ from src.components.data_tranformation import DataTransformation
 from src.components.data_tranformation import DataTransformationConfig
 from src.utils import save_object
 
+from src.components.model_trainer import ModelTrainer
+from src.components.model_trainer import ModelTrainerConfig
+
 """ 
   1.Configuration for data ingestion paths
   2.This class holds the file paths for training, testing, and raw data.
@@ -66,4 +69,9 @@ if __name__ == "__main__":
     train_data, test_data = obj.initiate_data_ingestion()
 
     data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data, test_data)
+    train_arr,test_arr,_ =  data_transformation.initiate_data_transformation(train_data, test_data)
+
+    modelTrainer = ModelTrainer()
+    print(modelTrainer.initiate_model_trainer(train_arr, test_arr))
+
+
