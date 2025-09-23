@@ -7,6 +7,9 @@ from src.exception import CustomException
 from dataclasses import dataclass
 from src.exception import CustomException
 
+from src.components.data_tranformation import DataTransformation
+from src.components.data_tranformation import DataTransformationConfig
+from src.utils import save_object
 
 """ 
   1.Configuration for data ingestion paths
@@ -56,4 +59,11 @@ class DataIngestion:
             )
         except Exception as e:
             logging.info("Exception occurred at data ingestion stage")
-            raise CustomException(e, sys)
+            raise CustomException(e, sys)  
+        
+if __name__ == "__main__":
+    obj = DataIngestion()
+    train_data, test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
